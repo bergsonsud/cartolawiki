@@ -1,0 +1,37 @@
+<div style="font-size: 25px;">MAIS ESCALADOS</div>
+<div class="row pagination-centered"">
+	<div class="col-md-12">
+		<table class="table table-bordered table-striped">
+		<thead>
+		<tr>
+			<th class="col-xs-3" style="width: 5%"></th>
+			<th class="col-xs-3" style="width: 85%">Jogador</th>
+			<th class="col-xs-3">Preço</th>
+			<th class="col-xs-3" style="width: 5%">Escalações</th>	
+		</tr>
+		<% position = 0%>
+		<% @players.each do |player| %>
+		<%position=position+1%>
+		<tr>		
+			<td><h2><b><%=position.to_s+"º"%></b></h2></td>
+			<td>
+			<div class="row">
+				<div class="col-md-2">
+					<%= image_tag player[:escudo_clube].to_s,size: "35" %>
+				</div>
+				<div class="col-md-4">
+					<%= image_tag (player[:Atleta][:foto].gsub! 'FORMATO', '140x140'.to_s),size: "75" %>
+				</div>			
+				<div class="col-md-4">
+					<h4><b><%= player[:Atleta][:apelido].to_s %></b></h4>
+					<b><h6><%= player[:posicao].to_s %></b></h6>
+				</div>
+			</div>
+			</td>
+			<td><%= number_to_currency player[:Atleta][:preco_editorial].to_s %></td>
+			<td><%= player[:escalacoes].to_s %></td>
+		</tr>
+		<% end %>
+		</table>
+	</div>
+</div>

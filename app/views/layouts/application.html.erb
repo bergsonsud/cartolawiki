@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cartola Wiki</title>  
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>  
+  <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Lato:900" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.css">
+</head>
+<body>
+	
+	 <div class="container">
+	 <%= render 'home/top' %>	
+		<%= yield %>
+		
+	</div>
+	</div>
+
+</body>
+</html>

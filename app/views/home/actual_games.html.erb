@@ -1,0 +1,45 @@
+<div style="font-size: 25px;">Jogos</div>
+<div class="row pagination-centered"">
+	<div class="col-md-12">
+		<table class="table table-bordered table-striped">
+		<thead>
+		<tr>
+		</tr>		
+		<% @games.each do |game| %>	
+		<% casa = @teams[game[:clube_casa_id].to_s]%>
+		<% visitante = @teams[game[:clube_visitante_id].to_s]%>
+		<tr align="center">					
+			<td>
+			<div class="row">		
+				<div class="col-md-12">
+					<h4><b><%= dia_local_lugar(game[:partida_data].to_datetime,game[:local]) %></b></h4>				
+					<h4>					
+					
+					<% game[:aproveitamento_mandante].reject(&:blank?).each do |i| %>
+  						<%= raw situacao_rodada(i) %>
+					<% end %>
+					
+					<%= extenso(game[:clube_casa_posicao].to_i) %>					
+					<%= image_tag casa[:escudos]["45x45"] %>
+					<%= game[:placar_oficial_mandante] %>
+
+					x
+
+					<%= game[:placar_oficial_visitante] %>
+					<%= image_tag visitante[:escudos]["45x45"] %>
+					<%= extenso(game[:clube_visitante_posicao].to_i) %>					
+
+					<% game[:aproveitamento_visitante].reverse.reject(&:blank?).each do |i| %>
+  						<%= raw situacao_rodada(i) %>
+					<% end %>				
+
+					</h4>				
+				
+				</div>
+			</div>
+			</td>
+		</tr>
+		<% end %>
+		</table>
+	</div>
+</div>
