@@ -1,0 +1,55 @@
+<%= image_tag @ads[:liga][:url_flamula_png].to_s,size: "65"%>
+<%= @ads[:liga][:nome] %>
+<%= @ads[:liga][:descricao] %>
+
+<div class="row pagination-centered"">
+	<div class="col-md-12">
+			<table class="table table-bordered table-striped">
+			<thead>
+			<tr>
+				<td>Time</td>
+				<td>Rodada</td>
+				<td>Últ Rodada</td>
+				<td>Mês</td>
+				<td>Total</td>
+			</tr>	
+
+				<% @ads[:times].each do |time| %>	
+
+					<tr align="left">					
+						<td>
+							<div class="row">		
+								<div class="col-md-12">
+									<div class="row">
+										<div class="col-md-2">
+											<%= image_tag time[:url_escudo_png].to_s,size: "65"%>
+										</div>
+										<div class="col-md-1">
+											<h6><%= time[:ranking][:campeonato]%></h6>
+										</div>
+									<div class="col-md-7">
+									<h4><b><%= time[:nome]%></b></h4>
+									<h6><%= time[:nome_cartola]%></h6>
+								</div>
+								<div>
+									<h6><%= number_to_currency time[:patrimonio].to_s %></h6>
+								</div>
+							</div>
+						</td>
+						<td>
+						<%= somar_pontos_por_slug time[:slug]%>
+						</td>
+						<td>
+							 <%=number_with_precision(time[:pontos][:rodada], :precision => 2)%>
+						</td>
+						<td>
+							 <%=number_with_precision(time[:pontos][:mes], :precision => 2)%>
+						</td>
+						<td>
+							 <%=number_with_precision(time[:pontos][:campeonato], :precision => 2)%>
+						</td>						
+					</tr>
+				<% end %>
+		</table>
+	</div>
+</div>
