@@ -1,4 +1,16 @@
-<div style="font-size: 25px;">Jogos</div>
+<div class="row">
+  <div class="col-md-2">
+    <% prev_disabled = "disabled" if !rodada_tem_anterior?(@rodada.to_i,@status[:rodada_atual].to_i) %>
+    <%= link_to home_trocar_rodada_path(rodada: @rodada.to_i-1),remote: true, :class =>"btn btn-primary #{prev_disabled}"  do %>  
+      <i class="glyphicon glyphicon-circle-arrow-left"></i>
+    <% end %>
+    <% next_disabled = "disabled" if !rodada_tem_proxima?(@rodada.to_i,@status[:rodada_atual].to_i) %>
+    <%= link_to home_trocar_rodada_path(rodada: @rodada.to_i+1),remote: true, :class =>"btn btn-primary #{next_disabled}"  do %>  
+      <i class="glyphicon glyphicon-circle-arrow-right"></i>
+    <% end %>
+	</div>
+</div>
+<div style="font-size: 25px;">Jogos rodada <%=@rodada.to_s%></div>
 <div class="row pagination-centered"">
 	<div class="col-md-12">
 		<table class="table table-bordered table-striped">

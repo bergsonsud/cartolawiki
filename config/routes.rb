@@ -1,6 +1,8 @@
 Rails.application.routes.draw do  
   root 'home#index'
   get 'home/actual_games'
+  get 'home/rodada'
+  get 'home/trocar_rodada'
   get 'home/minha_liga'
 
   # The priority is based upon order of creation: first created -> highest priority.
