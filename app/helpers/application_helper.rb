@@ -38,8 +38,10 @@ module ApplicationHelper
 	      	atletas = JSON.parse(RestClient.get("https://api.cartolafc.globo.com/time/slug/"+slug, nil), symbolize_names: true)
 	      	pontos  = 0      	
 	      	atletas[:atletas].each do |atleta|      		
-	      		#puts points[atleta[:atleta_id].to_s][:pontuacao].to_s
+	   				#pontos = pontos+points[atleta[:atleta_id].to_s][:pontuacao].to_i
+	      		pontos = pontos+atleta[:pontos_num].to_i
 	      	end
+	      	pontos
 	      else
 	      	0
 	      end

@@ -38,15 +38,15 @@ $(".button").click(function(){
 									<h4><b><%= time[:nome]%></b></h4>
 									<h6><%= time[:nome_cartola]%></h6>
 
-									<% if @mercado == "Aberto" %>										
-										<% atletas_por_slug(time[:slug])[:atletas].sort_by{|x| x[:position_id]}.each do |atleta| %>
+									<% if @mercado != "Aberto" %>										
+										<% atletas_por_slug(time[:slug])[:atletas].sort { |x,y| x[:posicao_id] <=> y[:posicao_id] }.each do |atleta| %>
 											<table class="table table-bordered table-striped">
 												<thead>
 													<tr>
 													</tr>
 												</thead>
 												<tr>
-												 <td><%=atleta[:apelido]%></td>		
+												 <td><%=atleta[:apelido]%> <%=atleta[:position_id]%></td>		
 												</tr>	
 											</table>											
 										<% end %>
@@ -59,7 +59,7 @@ $(".button").click(function(){
 							</div>
 						</td>
 						<td>
-						<%= somar_pontos_por_slug time[:slug]%>
+						<%= somar_pontos_por_slug(time[:slug])%>
 						</td>
 						<td>
 							 <%=number_with_precision(time[:pontos][:rodada], :precision => 2)%>
