@@ -39,17 +39,26 @@ $(".button").click(function(){
 									<h6><%= time[:nome_cartola]%></h6>
 
 									<% if @mercado != "Aberto" %>										
-										<% atletas_por_slug(time[:slug])[:atletas].sort { |x,y| x[:posicao_id] <=> y[:posicao_id] }.each do |atleta| %>
-											<table class="table table-bordered table-striped">
+									<table class="table table-bordered table-striped">
 												<thead>
 													<tr>
 													</tr>
-												</thead>
-												<tr>
-												 <td><%=atleta[:apelido]%> <%=atleta[:position_id]%></td>		
+												</thead>											
+										<% atletas_por_slug(time[:slug])[:atletas].sort { |x,y| x[:posicao_id] <=> y[:posicao_id] }.each do |atleta| %>
+												<tr>												 														
+												<td>
+												<div class="row">
+													<div class="col-md-2">														
+														<%= image_tag @clubes[atleta[:clube_id].to_s][:escudos]["60x60"],size: "35" %>
+													</div>													
+												</div>
+												</td>												
+												 <td><%=atleta[:apelido]%><b><h6><%= atleta[:posicao].to_s %></b></h6></td>		
+												 <td><%=number_with_precision(pontuacao(atleta[:atleta_id].to_s), :precision => 2)%></td>		
 												</tr>	
-											</table>											
+																						
 										<% end %>
+										</table>
 									<% end %>
 
 								</div>
@@ -59,7 +68,7 @@ $(".button").click(function(){
 							</div>
 						</td>
 						<td>
-						<%= somar_pontos_por_slug(time[:slug])%>
+						<%=number_with_precision(somar_pontos_por_slug(time[:slug]), :precision => 2)%>
 						</td>
 						<td>
 							 <%=number_with_precision(time[:pontos][:rodada], :precision => 2)%>

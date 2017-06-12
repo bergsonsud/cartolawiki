@@ -18,7 +18,13 @@ require 'json'
   end
 
   def minha_liga
-  	@teams = @ads[:times]
+    @teams = @ads[:times]
+
+    @points = JSON.parse(RestClient.get("https://api.cartolafc.globo.com/atletas/pontuados", nil), symbolize_names: true)
+    @points = @points[:atletas].with_indifferent_access
+
+    @clubes = @points = JSON.parse(RestClient.get("https://api.cartolafc.globo.com/clubes", nil), symbolize_names: true)
+    @clubes = @clubes.with_indifferent_access
   end
 
   def rodada
@@ -37,6 +43,7 @@ private
         RestClient.get("https://api.cartolafc.globo.com/auth/liga/adsfn2013-2", {'X-GLB-Token' => token}) do |f|        
           x = JSON.parse(f, symbolize_names: true)          
           if x[:mensagem].to_s != "Mercado em manutenção."
+            #@ads = JSON.parse(RestClient.get("https://api.cartolafc.globo.com/auth/liga/pool-football-club", {'X-GLB-Token' => token}), symbolize_names: true)
             @ads = JSON.parse(RestClient.get("https://api.cartolafc.globo.com/auth/liga/adsfn2013-2", {'X-GLB-Token' => token}), symbolize_names: true)
           else
             redirect_to root_path            
